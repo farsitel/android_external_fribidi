@@ -1,10 +1,10 @@
 /* FriBidi
  * fribidi-bidi-type.c - get character bidi type
  *
- * $Id: fribidi-bidi-type.c,v 1.11 2004-06-09 20:01:00 behdad Exp $
+ * $Id: fribidi-bidi-type.c,v 1.12 2004-06-13 20:11:42 behdad Exp $
  * $Author: behdad $
- * $Date: 2004-06-09 20:01:00 $
- * $Revision: 1.11 $
+ * $Date: 2004-06-13 20:11:42 $
+ * $Revision: 1.12 $
  * $Source: /cvs/fribidi/fribidi2/lib/Attic/fribidi-bidi-type.c,v $
  *
  * Authors:
@@ -34,9 +34,6 @@
 #include "common.h"
 
 #include <fribidi-bidi-type.h>
-#include <fribidi-unicode.h>
-
-#include "bidi-types.h"
 
 enum FriBidiCharTypeLinearEnum
 {

@@ -1,19 +1,17 @@
 /* FriBidi
- * env.h - private state variables
+ * fribidi-joining-type.c - get character joining type
  *
- * $Id: env.h,v 1.3 2004-06-13 20:11:42 behdad Exp $
+ * $Id: fribidi-joining-type.c,v 1.1 2004-06-13 20:11:42 behdad Exp $
  * $Author: behdad $
  * $Date: 2004-06-13 20:11:42 $
- * $Revision: 1.3 $
- * $Source: /cvs/fribidi/fribidi2/lib/Attic/env.h,v $
+ * $Revision: 1.1 $
+ * $Source: /cvs/fribidi/fribidi2/lib/Attic/fribidi-joining-type.c,v $
  *
- * Author:
- *   Behdad Esfahbod, 2001, 2002, 2004
- *   Dov Grobgeld, 1999, 2000
+ * Authors:
+ *   Behdad Esfahbod, 2004
  *
  * Copyright (C) 2004 Sharif FarsiWeb, Inc
- * Copyright (C) 2001,2002 Behdad Esfahbod
- * Copyright (C) 1999,2000 Dov Grobgeld
+ * Copyright (C) 2004 Behdad Esfahbod
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -32,31 +30,27 @@
  * 
  * For licensing issues, contact <license@farsiweb.info>.
  */
-#ifndef _ENV_H
-#define _ENV_H
 
 #include "common.h"
 
-#include <fribidi-bidi-types.h>
+#include <fribidi-joining-type.h>
+#include <fribidi-joining-types.h>
 
-#include "mem.h"
-#include "run.h"
+enum FriBidiJoiningTypeShortEnum
+{
+# define _FRIBIDI_ADD_TYPE(TYPE,SYMBOL) TYPE = FRIBIDI_JOINING_TYPE_##TYPE,
+# include "fribidi-joining-types-list.h"
+# undef _FRIBIDI_ADD_TYPE
+  _FRIBIDI_NUM_TYPES
+};
 
-#include <fribidi-begindecls.h>
+#include "joining-type.tab.i"
 
-#if !USE_SIMPLE_MALLOC
-
-#define free_runs FRIBIDI_PRIVATESPACE(free_runs)
-extern FriBidiRun *free_runs;
-
-#define run_mem_chunk FRIBIDI_PRIVATESPACE(run_mem_chunk)
-extern FriBidiMemChunk *run_mem_chunk;
-
-#endif /* !USE_SIMPLE_MALLOC */
-
-#include "fribidi-enddecls.h"
-
-#endif /* !_ENV_H */
-/* Editor directions:
- * vim:textwidth=78:tabstop=8:shiftwidth=2:autoindent:cindent
- */
+FRIBIDI_ENTRY FriBidiJoiningType
+fribidi_get_joining_type (
+  /* input */
+  FriBidiChar ch
+)
+{
+  return FRIBIDI_GET_JOINING_TYPE (ch);
+}
