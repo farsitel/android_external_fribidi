@@ -1,10 +1,10 @@
 /* FriBidi
  * fribidi-bidi-types.c - character bidi types
  *
- * $Id: fribidi-bidi-types.c,v 1.1 2004-04-25 18:47:57 behdad Exp $
+ * $Id: fribidi-bidi-types.c,v 1.2 2004-04-28 02:37:56 behdad Exp $
  * $Author: behdad $
- * $Date: 2004-04-25 18:47:57 $
- * $Revision: 1.1 $
+ * $Date: 2004-04-28 02:37:56 $
+ * $Revision: 1.2 $
  * $Source: /cvs/fribidi/fribidi2/lib/fribidi-bidi-types.c,v $
  *
  * Authors:
@@ -32,6 +32,8 @@
  */
 
 #include <fribidi-bidi-types.h>
+
+#include "bidi-types.h"
 
 #include "common.h"
 

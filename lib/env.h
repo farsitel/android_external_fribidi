@@ -1,17 +1,19 @@
 /* FriBidi
- * bidi-types.h - define internal bidi types
+ * env.h - private state variables
  *
- * $Id: bidi-types.h,v 1.2 2004-04-28 02:37:56 behdad Exp $
+ * $Id: env.h,v 1.1 2004-04-28 02:37:56 behdad Exp $
  * $Author: behdad $
  * $Date: 2004-04-28 02:37:56 $
- * $Revision: 1.2 $
- * $Source: /cvs/fribidi/fribidi2/lib/bidi-types.h,v $
+ * $Revision: 1.1 $
+ * $Source: /cvs/fribidi/fribidi2/lib/Attic/env.h,v $
  *
  * Author:
  *   Behdad Esfahbod, 2001, 2002, 2004
+ *   Dov Grobgeld, 1999, 2000
  *
- * Copyright (C) 2004 Sharif FarsiWeb, Inc.
+ * Copyright (C) 2004 Sharif FarsiWeb, Inc
  * Copyright (C) 2001,2002 Behdad Esfahbod
+ * Copyright (C) 1999,2000 Dov Grobgeld
  * 
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,56 +29,35 @@
  * along with this library, in a file named COPYING; if not, write to the
  * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
  * Boston, MA 02111-1307, USA
- *
+ * 
  * For licensing issues, contact <license@farsiweb.info>.
  */
-#ifndef _BIDI_TYPES_H
-#define _BIDI_TYPES_H
+#ifndef _ENV_H
+#define _ENV_H
 
 #include <fribidi-common.h>
 
-#include <fribidi-types.h>
 #include <fribidi-bidi-types.h>
+
+#include "mem.h"
 
 #include "common.h"
 
 #include <fribidi-begindecls.h>
 
-#define FRIBIDI_LEVEL_REMOVED -3
-#define FRIBIDI_LEVEL_START   -2
-#define FRIBIDI_LEVEL_END     -1
+#if !USE_SIMPLE_MALLOC
 
-/*
- * Define character types that char_type_tables use.
- * define them to be 0, 1, 2, ... and then in fribidi_get_type.c map them
- * to FriBidiCharTypes.
- */
-typedef char FriBidiPropCharType;
+#define free_runs FRIBIDI_PRIVATESPACE(free_runs)
+extern FriBidiRun *free_runs;
 
-enum FriBidiPropEnum
-{
-# define _FRIBIDI_ADD_TYPE(TYPE,SYMBOL) FRIBIDI_PROP_TYPE_##TYPE,
-# include "bidi-types-list.h"
-# undef _FRIBIDI_ADD_TYPE
-  _FRIBIDI_PROP_TYPES_COUNT
-};
+#define run_mem_chunk FRIBIDI_PRIVATESPACE(run_mem_chunk)
+extern FriBidiMemChunk *run_mem_chunk;
 
-#define fribidi_prop_to_type_ FRIBIDI_NAMESPACE(prop_to_type_)
-/* Maps fribidi_prop_types to fribidi_types */
-extern const FriBidiCharType fribidi_prop_to_type_[];
+#endif /* !USE_SIMPLE_MALLOC */
 
-#if DEBUG
+#include "fribidi-enddecls.h"
 
-#define fribidi_char_from_bidi_type FRIBIDI_PRIVATESPACE(char_from_bidi_type)
-FRIBIDI_ENTRY char fribidi_char_from_bidi_type (
-  FriBidiCharType t		/* input bidi type */
-);
-
-#endif /* DEBUG */
-
-#include <fribidi-enddecls.h>
-
-#endif /* !_BIDI_TYPES_H */
+#endif /* !_ENV_H */
 /* Editor directions:
  * vim:textwidth=78:tabstop=8:shiftwidth=2:autoindent:cindent
  */
