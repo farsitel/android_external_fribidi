@@ -11,6 +11,7 @@ AbsoluteTelnet: http://www.celestialsoftware.net/support/online-help/8-terminalf
 #
 Pango: http://www.pango.org/ # text rendering engine. statically links
 m17nlib: http://m17n.org/ # an i18n framework
+FarsiTel: http://farsitel.com/ # an Android distro
 #
 # editors and word processors:
 #
